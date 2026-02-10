@@ -295,29 +295,22 @@ button {
 
 <script>
 function playMusic() {
-  document.getElementById('music').play();
-}
+  const music = document.getElementById('music');
 
-function openInvitation() {
-  document.getElementById('cover').style.transform = 'translateY(-100%)';
-  document.getElementById('letter').classList.add('show');
-}
+  music.muted = false;
+  music.volume = 1;
 
-function backToCover() {
-  document.getElementById('cover').style.transform = 'translateY(0)';
-  document.getElementById('letter').classList.remove('show');
-}
-
-function showPopup(isYes) {
-  document.getElementById('popup').style.display = 'flex';
-  document.getElementById('popupText').innerText =
-    isYes ? 'Yay! I can’t wait to see you 💖' : 'Hmm… are you sure? 😌';
-
-  confetti({ particleCount: 160, spread: 80, origin: { y: 0.6 } });
-}
-
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
+  const playPromise = music.play();
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("Music playing 🎶");
+      })
+      .catch(error => {
+        alert("Tap sekali lagi untuk play music ❤️");
+        console.log(error);
+      });
+  }
 }
 </script>
 
